@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>This is a template!</h1>
+    <div>Name: {{.Name}}</div>
+    <div>Age: {{.Age}}</div>
+
+    <ul>
+      {{range .Hobbies}}
+      <li>{{.}}</li>
+      {{end}}
+    </ul>
+
+    {{if ge .Age 18}}
+    <p>You are old enough to vote.</p>
+    {{else}}
+    <p>You are not old enough to vote.</p>
+    {{end}}
+  </body>
+</html>

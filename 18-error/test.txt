@@ -1,0 +1,2 @@
+hello world
+defer 的主要特点
