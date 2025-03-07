@@ -1,0 +1,36 @@
+log:
+  file_path: ./log
+  level: debug
+  max_size: 300
+  max_backups: 300
+  max_age: 10
+
+llmConfig:
+  url: https://dashscope.aliyuncs.com/compatible-mode/v1
+  api_key: sk-c92317d0f9dc4506abca14070845f6e1
+  model: qwen2.5-coder-32b-instruct
+  model_concurrency:
+    qwen2.5-coder-32b-instruct: 5
+  default_concurrency: 5
+  max_token: 1024
+
+businessConfig:
+  obsBucket: ai-3d-model-bucket
+  obsExpire: 365
+  uploadPath: document-parser/result/
+  localFileRoot: ./data/document-parser/pdf
+  localOutputPath: ./data/document-parser/md
+  condaPath: /root/anaconda3/etc/profile.d/conda.sh
+  condaEnv: MinerU-1.0
+  condaShellPath: /bin/bash
+  pdfConvertWorkers: 1
+  pdfConvertQueueSize: 100
+  cudaVisibleDevices: 1
+  sofficePath: /usr/bin/soffice
+  ocrmypdfPath: /usr/bin/ocrmypdf
+  ocrmypdfLanguage: eng
+  filePageSaveTimeout: 30
+
+excelParseConfig:
+  baseUrl: 'http://10.18.101.42:8011'
+  apiPath: '/api/excel/parse'
