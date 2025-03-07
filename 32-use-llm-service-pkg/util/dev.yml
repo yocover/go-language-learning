@@ -1,0 +1,15 @@
+log:
+  file_path: ./log
+  level: debug
+  max_size: 300
+  max_backups: 300
+  max_age: 10
+
+llmConfig:
+  url: https://dashscope.aliyuncs.com/compatible-mode/v1
+  api_key: sk-c92317d0f9dc4506abca14070845f6e1
+  model: qwen2.5-coder-32b-instruct
+  model_concurrency:
+    qwen2.5-coder-32b-instruct: 5
+  default_concurrency: 5
+  max_token: 1024
