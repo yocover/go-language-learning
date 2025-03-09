@@ -25,4 +25,7 @@ func main() {
 
 	// 5.测试条件变量
 	// testCond()
+
+	// 7.测试死锁
+	testDeadlock()
 }
