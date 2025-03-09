@@ -19,7 +19,14 @@ if [ -z "$changed_files" ]; then
 fi
 
 # 生成提交信息
-commit_message="自动提交: $current_time"
+if [ -z "$1" ]; then
+    # 如果没有提供参数，使用默认的时间戳信息
+    commit_message="自动提交: $current_time"
+else
+    # 如果提供了参数，使用用户提供的信息
+    commit_message="$1 - $current_time"
+fi
+
 echo "提交信息: $commit_message"
 echo "更改的文件:"
 echo "$changed_files"
