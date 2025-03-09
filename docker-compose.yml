@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: go-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: MyR00t@2024!    # 更强的 root 密码
+      MYSQL_DATABASE: myapp_db             # 更改数据库名
+      MYSQL_USER: dbadmin                  # 更改用户名
+      MYSQL_PASSWORD: DbUs3r@2024!         # 更强的用户密码
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    command: --default-authentication-plugin=mysql_native_password --bind-address=0.0.0.0
+    restart: always
+
+volumes:
+  mysql_data: 
