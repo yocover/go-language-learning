@@ -40,5 +40,8 @@ func main() {
 	// testSleepVsChannel()
 
 	// 10.测试方法接收者的区别
-	testMethodReceiver()
+	// testMethodReceiver()
+
+	// 11.测试单例模式
+	testSingleton()
 }
