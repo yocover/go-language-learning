@@ -27,5 +27,18 @@ func main() {
 	// testCond()
 
 	// 7.测试死锁
-	testDeadlock()
+	// testDeadlock()
+
+	// 8.测试主协程退出
+	// testMainExit()
+	// testMainExit2()
+	// testMainExit3()
+	// testMainExit4()
+	// testMainExit5()
+
+	// 9.测试 Sleep 和 Channel 的区别
+	// testSleepVsChannel()
+
+	// 10.测试方法接收者的区别
+	testMethodReceiver()
 }
