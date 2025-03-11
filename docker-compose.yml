@@ -17,5 +17,21 @@ services:
     command: --default-authentication-plugin=mysql_native_password --bind-address=0.0.0.0
     restart: always
 
+  redis:
+    image: redis:7.2-alpine
+    container_name: go-redis
+    command: redis-server --requirepass RedisP@ss2024! --appendonly yes
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: always
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "RedisP@ss2024!", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
 volumes:
-  mysql_data: 
+  mysql_data:
+  redis_data: 
