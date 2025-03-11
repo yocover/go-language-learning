@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS dm_excel_json_store (
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,  -- 更新时间
     
     -- 添加索引以提高查询性能
-    CONSTRAINT file_json_store_file_id_unique UNIQUE (file_id)
+    CONSTRAINT dm_excel_json_store_file_id_unique UNIQUE (file_id)
 );
 
 -- 创建索引（只保留基本索引）
