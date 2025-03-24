@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package api;
+option go_package = "example/examples/kitex_demo/kitex_gen/api";
+
+// 计算服务接口定义
+service Calculator {
+    // 加法操作
+    rpc Add(CalcRequest) returns (CalcResponse) {}
+    // 减法操作
+    rpc Subtract(CalcRequest) returns (CalcResponse) {}
+}
+
+// 计算请求
+message CalcRequest {
+    int64 a = 1;
+    int64 b = 2;
+}
+
+// 计算响应
+message CalcResponse {
+    int64 result = 1;
+    string error = 2;
+} 
