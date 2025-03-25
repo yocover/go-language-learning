@@ -1,0 +1,13 @@
+# API权限定义
+p, admin, /api/*, *
+p, developer, /api/v1/products/*, GET
+p, developer, /api/v1/products/*, POST
+p, developer, /api/v1/products/:id, PUT
+p, developer, /api/v1/products/:id, DELETE
+p, user, /api/v1/products/*, GET
+p, user, /api/v1/products/:id/comments, POST
+
+# 用户角色定义
+g, alice, admin
+g, bob, developer
+g, charles, user 

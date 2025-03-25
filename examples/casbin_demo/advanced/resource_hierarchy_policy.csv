@@ -1,0 +1,11 @@
+p, admin, /data/*, write
+p, developer, /data/project/*, read
+p, user, /data/public/*, read
+
+g, alice, admin
+g, bob, developer
+g, charles, user
+
+g2, /data/project/secret, /data/project/*
+g2, /data/project/public, /data/project/*
+g2, /data/public/docs, /data/public/* 

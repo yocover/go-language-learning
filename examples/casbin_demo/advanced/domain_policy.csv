@@ -1,0 +1,9 @@
+p, admin, domain1, data, write
+p, admin, domain2, data, write
+p, user, domain1, data, read
+p, user, domain2, data, read
+
+g, alice, admin, domain1
+g, bob, user, domain1
+g, catherine, admin, domain2
+g, david, user, domain2 

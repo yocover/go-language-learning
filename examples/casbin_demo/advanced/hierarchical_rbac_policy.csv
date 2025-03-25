@@ -1,0 +1,9 @@
+p, admin, data, write
+p, manager, data, read
+p, user, data, view
+
+g, manager, user
+g, admin, manager
+g, alice, admin
+g, bob, manager
+g, charles, user 
