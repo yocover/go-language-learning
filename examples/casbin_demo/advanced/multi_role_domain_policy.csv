@@ -1,0 +1,13 @@
+p, admin, data, read, site1, allow
+p, admin, data, write, site1, allow
+p, manager, data, read, site2, allow
+p, group_leader, report, read, site1, allow
+
+g, alice, super_admin
+g, bob, admin
+
+g2, charles, group_leader
+g2, david, manager
+
+g3, eve, admin
+g3, frank, manager 

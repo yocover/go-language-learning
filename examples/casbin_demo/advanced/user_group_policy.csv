@@ -1,0 +1,42 @@
+# 基本角色权限
+p, admin, platform, /api/*, (GET)|(POST)|(PUT)|(DELETE), allow
+p, manager, platform, /api/manage/*, (GET)|(POST)|(PUT), allow
+p, user, platform, /api/public/*, GET, allow
+
+# 用户组权限
+p, super_group, platform, /api/group/*, (GET)|(POST)|(PUT)|(DELETE), allow
+p, normal_group, platform, /api/group/public/*, GET, allow
+p, vip_group, platform, /api/group/vip/*, (GET)|(POST), allow
+
+# 用户-角色关系
+g, alice, admin
+g, bob, manager
+g, charlie, user
+
+# 用户-用户组关系（根据图中的结构）
+# 超级用户组
+g2, alice, super_group
+g2, bob, super_group
+
+# 普通用户组
+g2, charlie, normal_group
+g2, david, normal_group
+g2, eve, normal_group
+
+# VIP用户组
+g2, frank, vip_group
+g2, grace, vip_group
+
+# 用户组层级关系
+g3, normal_group, super_group
+g3, vip_group, super_group
+
+# 功能权限
+p, super_group, platform, /api/features/admin/*, (GET)|(POST)|(PUT)|(DELETE), allow
+p, vip_group, platform, /api/features/vip/*, (GET)|(POST), allow
+p, normal_group, platform, /api/features/basic/*, GET, allow
+
+# 资源访问权限
+p, super_group, platform, /api/resources/*, (GET)|(POST)|(PUT)|(DELETE), allow
+p, vip_group, platform, /api/resources/vip/*, (GET)|(POST), allow
+p, normal_group, platform, /api/resources/public/*, GET, allow 

@@ -1,0 +1,20 @@
+# 角色基本权限
+p, admin, *, *, allow                    # 管理员可以对所有资源进行任何操作
+p, group_leader, doc_private, read, allow   # 组长可以读取私有文档
+p, group_leader, doc_private, write, allow  # 组长可以修改私有文档
+p, user, doc_public, read, allow         # 普通用户可以读取公共文档
+
+# 用户-角色关系
+g, alice, admin
+g, bob, group_leader
+
+# 用户-用户组关系
+g2, charles, user
+g2, david, user
+g2, eve, user
+
+# 文档-类型关系
+g3, doc1, doc_private    # doc1是私有文档
+g3, doc2, doc_private    # doc2是私有文档
+g3, doc3, doc_public     # doc3是公共文档
+g3, doc4, doc_public     # doc4是公共文档 

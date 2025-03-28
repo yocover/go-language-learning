@@ -1,0 +1,49 @@
+# 系统角色基本权限
+p, admin, platform, /api/*, (GET)|(POST)|(PUT)|(DELETE), *, allow
+p, manager, platform, /api/department/*, (GET)|(POST)|(PUT), *, allow
+p, user, platform, /api/public/*, GET, *, allow
+
+# 部门主管权限
+p, dept_manager, platform, /api/department/:id/*, (GET)|(POST)|(PUT), *, allow
+p, dept_manager, platform, /api/employee/:id/*, GET, *, allow
+
+# 用户-角色关系
+g, admin_user, admin, platform
+g, manager_user, manager, platform
+
+# 部门层级关系（基于图中的组织架构）
+# 总部
+g3, finance_dept, headquarters, platform
+g3, hr_dept, headquarters, platform
+g3, it_dept, headquarters, platform
+g3, operation_dept, headquarters, platform
+
+# 研发部门子部门
+g3, frontend_team, it_dept, platform
+g3, backend_team, it_dept, platform
+g3, qa_team, it_dept, platform
+
+# 运营部门子部门
+g3, marketing_team, operation_dept, platform
+g3, customer_service, operation_dept, platform
+
+# 用户-部门关系
+g2, user1, it_dept, platform
+g2, user2, frontend_team, platform
+g2, user3, backend_team, platform
+g2, user4, hr_dept, platform
+
+# 资源类型定义
+g4, doc1, technical_doc, platform
+g4, doc2, hr_doc, platform
+g4, doc3, financial_doc, platform
+
+# 部门特定权限
+p, it_dept, platform, /api/technical/*, (GET)|(POST)|(PUT), *, allow
+p, hr_dept, platform, /api/hr/*, (GET)|(POST)|(PUT), *, allow
+p, finance_dept, platform, /api/finance/*, (GET)|(POST)|(PUT), *, allow
+
+# 团队特定权限
+p, frontend_team, platform, /api/technical/frontend/*, (GET)|(POST)|(PUT), *, allow
+p, backend_team, platform, /api/technical/backend/*, (GET)|(POST)|(PUT), *, allow
+p, qa_team, platform, /api/technical/qa/*, (GET)|(POST)|(PUT), *, allow 

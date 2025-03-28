@@ -1,0 +1,65 @@
+ # 基本角色权限
+p, admin, platform, /api/*, (GET)|(POST)|(PUT)|(DELETE), allow
+p, manager, platform, /api/manage/*, (GET)|(POST)|(PUT), allow
+p, user, platform, /api/public/*, GET, allow
+
+# 用户组权限 - 文档管理相关
+p, super_group, platform, /api/documents/*, (GET)|(POST)|(PUT)|(DELETE), allow
+p, normal_group, platform, /api/documents/public/*, GET, allow
+p, vip_group, platform, /api/documents/private/*, (GET)|(POST), allow
+
+# 用户-角色关系
+g, alice, admin
+g, bob, manager
+g, charlie, user
+
+# 用户-用户组关系
+# 超级用户组（可以管理所有文档）
+g2, alice, super_group
+g2, bob, super_group
+
+# 普通用户组（只能查看公共文档，管理自己的文档）
+g2, charlie, normal_group
+g2, david, normal_group
+g2, eve, normal_group
+
+# VIP用户组（可以查看和创建私有文档）
+g2, frank, vip_group
+g2, grace, vip_group
+
+# 用户组层级关系
+g3, normal_group, super_group
+g3, vip_group, super_group
+
+# 文档权限策略
+# 公共文档权限
+p, normal_group, platform, /api/documents/public/*, GET, allow
+p, normal_group, platform, /api/documents/public/*/comments, POST, allow
+
+# VIP文档权限
+p, vip_group, platform, /api/documents/private/*, (GET)|(POST), allow
+p, vip_group, platform, /api/documents/public/*, (GET)|(POST)|(PUT), allow
+p, vip_group, platform, /api/documents/*/comments, (GET)|(POST), allow
+
+# 超级组文档权限
+p, super_group, platform, /api/documents/*, (GET)|(POST)|(PUT)|(DELETE), allow
+p, super_group, platform, /api/documents/*/share, POST, allow
+p, super_group, platform, /api/documents/*/permissions, (GET)|(POST)|(PUT), allow
+
+# 个人文档权限（所有用户对自己的文档都有完全控制权）
+p, user, platform, /api/documents/self/*, (GET)|(POST)|(PUT)|(DELETE), allow
+
+# 文档分类权限
+p, super_group, platform, /api/categories/*, (GET)|(POST)|(PUT)|(DELETE), allow
+p, vip_group, platform, /api/categories/*, GET, allow
+p, normal_group, platform, /api/categories/public/*, GET, allow
+
+# 文档标签权限
+p, super_group, platform, /api/tags/*, (GET)|(POST)|(PUT)|(DELETE), allow
+p, vip_group, platform, /api/tags/*, (GET)|(POST), allow
+p, normal_group, platform, /api/tags/public/*, GET, allow
+
+# 文档评论权限
+p, super_group, platform, /api/comments/*, (GET)|(POST)|(PUT)|(DELETE), allow
+p, vip_group, platform, /api/comments/*, (GET)|(POST), allow
+p, normal_group, platform, /api/comments/public/*, (GET)|(POST), allow

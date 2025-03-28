@@ -290,6 +290,68 @@ func ExampleABAC() {
 	}
 }
 
+func ExampleMultiRoleDomain() {
+	e, err := casbin.NewEnforcer("multi_role_domain_model.conf", "multi_role_domain_policy.csv")
+	if err != nil {
+		log.Fatalf("NewEnforcer failed: %v", err)
+	}
+
+	// 添加策略
+	// 基本权限策略
+	e.AddPolicy("admin", "data", "read", "site1", "allow")
+	e.AddPolicy("admin", "data", "write", "site1", "allow")
+	e.AddPolicy("manager", "data", "read", "site2", "allow")
+	e.AddPolicy("group_leader", "report", "read", "site1", "allow")
+
+	// 用户-角色关系 (g)
+	e.AddGroupingPolicy("alice", "super_admin")
+	e.AddGroupingPolicy("bob", "admin")
+
+	// 用户-群组关系 (g2)
+	e.AddNamedGroupingPolicy("g2", "charles", "group_leader")
+	e.AddNamedGroupingPolicy("g2", "david", "manager")
+
+	// 用户-站点关系 (g3)
+	e.AddNamedGroupingPolicy("g3", "eve", "admin")
+	e.AddNamedGroupingPolicy("g3", "frank", "manager")
+
+	// 测试用例
+	testCases := []struct {
+		user   string
+		obj    string
+		act    string
+		domain string
+		desc   string
+	}{
+		{"alice", "data", "write", "site1", "超级管理员写入site1数据"},
+		{"alice", "data", "write", "site2", "超级管理员写入site2数据"},
+		{"bob", "data", "write", "site1", "管理员写入site1数据"},
+		{"bob", "data", "write", "site2", "管理员写入site2数据"},
+		{"charles", "report", "read", "site1", "组长读取site1报告"},
+		{"charles", "data", "write", "site1", "组长尝试写入site1数据"},
+		{"david", "data", "read", "site2", "经理读取site2数据"},
+		{"eve", "data", "write", "site1", "站点管理员写入数据"},
+		{"frank", "data", "read", "site2", "站点经理读取数据"},
+	}
+
+	fmt.Println("\n=== 多重角色和域控制测试 ===")
+	fmt.Println("\n权限测试结果:")
+	for _, tc := range testCases {
+		ok, err := e.Enforce(tc.user, tc.obj, tc.act, tc.domain)
+		if err != nil {
+			log.Printf("Enforce failed: %v", err)
+			continue
+		}
+		fmt.Printf("用户: %-8s | 操作: %-6s | 资源: %-6s | 域: %-6s | %-30s | 允许访问: %v\n",
+			tc.user,
+			tc.act,
+			tc.obj,
+			tc.domain,
+			tc.desc,
+			ok)
+	}
+}
+
 func main() {
 	fmt.Println("运行高级 Casbin 示例...")
 	ExampleHierarchicalRBAC()

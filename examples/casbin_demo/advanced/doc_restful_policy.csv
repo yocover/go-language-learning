@@ -1,0 +1,17 @@
+# 管理员权限
+p, admin, /api/v1/*, (GET)|(POST)|(PUT)|(DELETE), allow
+
+# 文档管理权限
+p, group_leader, /api/v1/documents/private/*, (GET)|(PUT), allow
+p, group_leader, /api/v1/documents/public/*, (GET)|(POST)|(PUT), allow
+p, user, /api/v1/documents/public/*, GET, allow
+p, user, /api/v1/documents/public/*/comments, POST, allow
+
+# 用户-角色关系
+g, alice, admin
+g, bob, group_leader
+
+# 用户-用户组关系
+g2, charles, user
+g2, david, user
+g2, eve, user 
